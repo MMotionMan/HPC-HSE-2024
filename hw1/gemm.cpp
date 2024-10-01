@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cblas.h"
 #include <omp.h>
 #include <chrono>
 
@@ -109,12 +110,13 @@ void dgemm_with_collapse(int M, int N, int K, double *A, double *B, double *C)
     }
 }
 
+
 int main()
 {
     int threads_count = 3;
     int size_count = 3;
     int N[3] = {500, 1000, 1500};
-    int P[size_count] = {1, 2, 4};
+    int P[size_count] = {1, 2, 4, 8, 16};
 
     // int m = 1000;
     // int n = 1000;
@@ -174,6 +176,27 @@ int main()
             serial_duration = end_time - start_time; 
             std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
         }
+
+        start_time = std::chrono::high_resolution_clock::now();
+        cblas_dgemm(
+            CblasColMajor,
+            CblasNoTrans,
+            CblasNoTrans,
+            M,
+            N,
+            K,
+            1.0,
+            A,
+            M,
+            B,
+            K,
+            0.0,
+            C,
+            M);
+        end_time = std::chrono::high_resolution_clock::now(); 
+        serial_duration = end_time - start_time; 
+        std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
+
         delete[] A;
         delete[] B;
         delete[] C;

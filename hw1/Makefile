@@ -1,5 +1,5 @@
-CC=g++-14
-FLAGS=-std=c++20 -fopenmp
+CC=g++
+FLAGS=-lopenblas -fopenmp
 
 all: test_omp
 
