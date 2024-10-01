@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cblas.h"
+#include <cblas.h>
 #include <omp.h>
 #include <chrono>
 
