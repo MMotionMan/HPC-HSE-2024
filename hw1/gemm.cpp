@@ -135,8 +135,8 @@ int main()
         B = new double[k * n];
         C = new double[m * n];
 
-        auto start_time;
-        auto end_time;
+        auto start_time = std::chrono::high_resolution_clock::now();
+        auto end_time = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> serial_duration;
 
         std::cout << "\n" << "matrix size: " << N[matr_size] << std::endl;
