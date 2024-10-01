@@ -135,6 +135,10 @@ int main()
         B = new double[k * n];
         C = new double[m * n];
 
+        auto start_time;
+        auto end_time;
+        std::chrono::duration<double> serial_duration;
+
         std::cout << "\n" << "matrix size: " << N[matr_size] << std::endl;
         for (int threads_num = 0; threads_num != threads_count; ++threads_num) {
             omp_set_num_threads(P[threads_num]);
@@ -146,9 +150,9 @@ int main()
             init_zeros_matrix(C, m, n);
             // print_matrix(A, m, k);
             // print_matrix(B, k, n);
-            auto start_time = std::chrono::high_resolution_clock::now(); 
+            start_time = std::chrono::high_resolution_clock::now(); 
             dgemm(m, n, k, A, B, C);
-            auto end_time = std::chrono::high_resolution_clock::now(); 
+            end_time = std::chrono::high_resolution_clock::now(); 
             std::chrono::duration<double> serial_duration = end_time - start_time; 
             std::cout << "dgemm time: " << serial_duration.count() << std::endl;
 
@@ -178,21 +182,7 @@ int main()
         }
 
         start_time = std::chrono::high_resolution_clock::now();
-        cblas_dgemm(
-            CblasColMajor,
-            CblasNoTrans,
-            CblasNoTrans,
-            M,
-            N,
-            K,
-            1.0,
-            A,
-            M,
-            B,
-            K,
-            0.0,
-            C,
-            M);
+        cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, M, N, K, 1.0, A, M, B, K, 0.0, C, M);
         end_time = std::chrono::high_resolution_clock::now(); 
         serial_duration = end_time - start_time; 
         std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
