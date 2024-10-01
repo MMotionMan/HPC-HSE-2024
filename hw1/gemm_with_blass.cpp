@@ -116,7 +116,7 @@ int main()
     int threads_count = 5;
     int size_count = 3;
     int N[3] = {500, 1000, 1500};
-    int P[size_count] = {1, 2, 4, 8, 16};
+    int P[threads_count] = {1, 2, 4, 8, 16};
 
     // int m = 1000;
     // int n = 1000;
@@ -179,16 +179,15 @@ int main()
             end_time = std::chrono::high_resolution_clock::now(); 
             serial_duration = end_time - start_time; 
             std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
-        }
-
-        start_time = std::chrono::high_resolution_clock::now();
-        cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, A, m, B, k, 0.0, C, m);
-        end_time = std::chrono::high_resolution_clock::now(); 
-        serial_duration = end_time - start_time; 
-        std::cout << "cblass_dgemm time: " << serial_duration.count() << std::endl;
-
+            
+   	    start_time = std::chrono::high_resolution_clock::now();
+            cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, A, m, B, k, 0.0, C, m);
+            end_time = std::chrono::high_resolution_clock::now();
+            serial_duration = end_time - start_time;
+            std::cout << "cblass_dgemm time: " << serial_duration.count() << std::endl;
+	}
         delete[] A;
-        delete[] B;
+	delete[] B;
         delete[] C;
     }
 

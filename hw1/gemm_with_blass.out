@@ -1,0 +1,116 @@
+g++ -lopenblas -fopenmp gemm_with_blass.cpp -o main_arr.o
+./main_arr.o
+
+matrix size: 500
+
+threads num: 1
+dgemm time: 0.398321
+dgemm_openmp_with_red time: 0.535874
+dgemm_one_parallel time: 0.412156
+dgemm_all_parallel time: 0.535846
+dgemm_with_collapse time: 0.412727
+
+threads num: 2
+dgemm time: 0.3712
+dgemm_openmp_with_red time: 0.407309
+dgemm_one_parallel time: 0.450668
+dgemm_all_parallel time: 0.318816
+dgemm_with_collapse time: 0.284278
+
+threads num: 4
+dgemm time: 0.371436
+dgemm_openmp_with_red time: 0.228728
+dgemm_one_parallel time: 0.34459
+dgemm_all_parallel time: 0.235603
+dgemm_with_collapse time: 0.351215
+
+threads num: 8
+dgemm time: 0.418303
+dgemm_openmp_with_red time: 0.142299
+dgemm_one_parallel time: 0.309778
+dgemm_all_parallel time: 0.0724244
+dgemm_with_collapse time: 0.272808
+
+threads num: 16
+dgemm time: 0.365599
+dgemm_openmp_with_red time: 0.115817
+dgemm_one_parallel time: 0.345619
+dgemm_all_parallel time: 0.0645518
+dgemm_with_collapse time: 0.287404
+cblass_dgemm time: 0.00489753
+
+matrix size: 1000
+
+threads num: 1
+dgemm time: 2.83999
+dgemm_openmp_with_red time: 3.42303
+dgemm_one_parallel time: 3.13772
+dgemm_all_parallel time: 3.42376
+dgemm_with_collapse time: 3.13479
+
+threads num: 2
+dgemm time: 2.84129
+dgemm_openmp_with_red time: 2.11343
+dgemm_one_parallel time: 2.40622
+dgemm_all_parallel time: 1.83219
+dgemm_with_collapse time: 2.53957
+
+threads num: 4
+dgemm time: 2.84258
+dgemm_openmp_with_red time: 1.09089
+dgemm_one_parallel time: 2.24584
+dgemm_all_parallel time: 1.00707
+dgemm_with_collapse time: 2.311
+
+threads num: 8
+dgemm time: 2.84307
+dgemm_openmp_with_red time: 0.647464
+dgemm_one_parallel time: 2.28879
+dgemm_all_parallel time: 0.488213
+dgemm_with_collapse time: 2.27236
+
+threads num: 16
+dgemm time: 2.87626
+dgemm_openmp_with_red time: 0.387703
+dgemm_one_parallel time: 2.19855
+dgemm_all_parallel time: 0.345612
+dgemm_with_collapse time: 2.21492
+cblass_dgemm time: 0.017286
+
+matrix size: 1500
+
+threads num: 1
+dgemm time: 9.39805
+dgemm_openmp_with_red time: 10.7579
+dgemm_one_parallel time: 10.2746
+dgemm_all_parallel time: 10.7394
+dgemm_with_collapse time: 10.2769
+
+threads num: 2
+dgemm time: 9.38436
+dgemm_openmp_with_red time: 6.36209
+dgemm_one_parallel time: 7.96733
+dgemm_all_parallel time: 5.66382
+dgemm_with_collapse time: 7.8182
+
+threads num: 4
+dgemm time: 9.40918
+dgemm_openmp_with_red time: 3.30548
+dgemm_one_parallel time: 7.67085
+dgemm_all_parallel time: 3.16387
+dgemm_with_collapse time: 7.58414
+
+threads num: 8
+dgemm time: 9.37703
+dgemm_openmp_with_red time: 1.56246
+dgemm_one_parallel time: 7.58832
+dgemm_all_parallel time: 1.56653
+dgemm_with_collapse time: 7.49609
+
+threads num: 16
+dgemm time: 9.40124
+dgemm_openmp_with_red time: 1.16901
+dgemm_one_parallel time: 7.63284
+dgemm_all_parallel time: 1.05509
+dgemm_with_collapse time: 7.53114
+cblass_dgemm time: 0.0232809
