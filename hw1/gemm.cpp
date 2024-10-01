@@ -114,8 +114,8 @@ int main()
 {
     int threads_count = 5;
     int size_count = 3;
-    int N[3] = {500, 1000, 1500};
-    int P[size_count] = {1, 2, 4, 8, 16};
+    int N[size_count] = {500, 1000, 1500};
+    int P[threads_count] = {1, 2, 4, 8, 16};
 
     // int m = 1000;
     // int n = 1000;
@@ -125,7 +125,7 @@ int main()
     double *B;
     double *C;
     
-    for (int matr_size = 0; matr_size != size_count; ++matr_size) {
+    for (int matr_size = 0; matr_size < size_count; ++matr_size) {
         int m = N[matr_size];
         int n = N[matr_size];
         int k = N[matr_size];
@@ -139,7 +139,7 @@ int main()
         std::chrono::duration<double> serial_duration;
 
         std::cout << "\n" << "matrix size: " << N[matr_size] << std::endl;
-        for (int threads_num = 0; threads_num != threads_count; ++threads_num) {
+        for (int threads_num = 0; threads_num < threads_count; ++threads_num) {
             omp_set_num_threads(P[threads_num]);
 
             std::cout << "\n" << "threads num: " << P[threads_num] << std::endl;
