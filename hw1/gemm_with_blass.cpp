@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cblas.h>
 #include <omp.h>
 #include <chrono>
 
@@ -180,8 +181,17 @@ int main()
             std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
         }
 
+        start_time = std::chrono::high_resolution_clock::now();
+        cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, A, m, B, k, 0.0, C, m);
+        end_time = std::chrono::high_resolution_clock::now(); 
+        serial_duration = end_time - start_time; 
+        std::cout << "cblass_dgemm time: " << serial_duration.count() << std::endl;
+
         delete[] A;
         delete[] B;
         delete[] C;
     }
+
+    
+
 }
