@@ -1,7 +1,10 @@
 CC=g++
 FLAGS=-fopenmp
 BLASS=-lopenblas
-MKL=-lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lpthread -lm -ldl
+MKLROOT=/opt/intel/mkl
+MKL=-lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+MKL_INCLUDE=-I$(MKLROOT)/include
+MKL_LINK=-L$(MKLROOT)/lib/intel64
 
 all: test_omp
 
@@ -15,7 +18,7 @@ build_blass: gemm_with_blass.cpp
 	$(CC) $(FLAGS) $(BLASS) gemm_with_blass.cpp -o main_arr.o
 
 build_mkl: gemm_with_mkl.cpp
-	$(CC) $(FLAGS) $(MKL) gemm_with_mkl.cpp -o main_mkl_arr.o
+	$(CC) $(FLAGS) $(MKL_INCLUDE) $(MKL_LINK) $(MKL) gemm_with_mkl.cpp -o main_mkl_arr.o
 
 clean:
 	rm -rf *.o hw1

@@ -126,7 +126,7 @@ void dgemm_manual(int M, int N, int K, double *A, double *B, double *C)
                 
             }
             #pragma omp critical
-            sum += local_sum
+            sum += local_sum;
             C[j * M + i] = sum;
         }
     }    
@@ -209,7 +209,7 @@ int main()
             std::cout << "cblass_dgemm time: " << serial_duration.count() << std::endl;
 
             start_time = std::chrono::high_resolution_clock::now(); 
-            dgemm_manual(m, n, k, A, B, C)
+            dgemm_manual(m, n, k, A, B, C);
             end_time = std::chrono::high_resolution_clock::now();
             serial_duration = end_time - start_time;
             std::cout << "dgemm_manual time: " << serial_duration.count() << std::endl;

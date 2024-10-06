@@ -1,0 +1,26 @@
+/var/spool/slurm/d/job2260241/slurm_script: line 3: --job-name=gemm_cpp_task: command not found
+Removing tbb version 2021.7.1
+Use `module list` to view any remaining dependent modules.
+Removing compiler-rt version 2022.2.1
+Use `module list` to view any remaining dependent modules.
+Removing mkl version 2022.2.1
+Use `module list` to view any remaining dependent modules.
+Loading tbb version 2021.7.1
+Loading compiler-rt version 2022.2.1
+Loading mkl version 2022.2.1
+Removing mkl version 2022.2.1
+Use `module list` to view any remaining dependent modules.
+Loading mkl version 2022.2.1
+g++ -fopenmp -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl gemm_with_mkl.cpp -o main_mkl_arr.o
+g++ -fopenmp -I/opt/intel/mkl/include -L/opt/intel/mkl/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl gemm_with_mkl.cpp -o main_mkl_arr.o
+./main_mkl_arr.o
+
+matrix size: 500
+mkl cblass dgemm time: 0.00748088
+
+matrix size: 1000
+mkl cblass dgemm time: 0.0239219
+
+matrix size: 1500
+mkl cblass dgemm time: 0.07332
+/var/spool/slurm/d/job2260241/slurm_script: line 14: /home/anvakirichenko: Это каталог
