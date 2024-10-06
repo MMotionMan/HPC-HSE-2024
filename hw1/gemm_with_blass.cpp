@@ -110,6 +110,28 @@ void dgemm_with_collapse(int M, int N, int K, double *A, double *B, double *C)
     }
 }
 
+void dgemm_manual(int M, int N, int K, double *A, double *B, double *C)
+{
+    double sum = 0;
+#pragma omp parallel
+{
+    int nthreads = omp_get_num_threads();
+    double local_sum = 0;
+    for (int i = 0; i < M; ++i) {
+        for (int j = 0; j < N; ++j) {
+            int idx = omp_get_thread_num();
+            sum = 0;
+            for (int l = idx; l < K; l = l + nthreads) {
+                local_sum += A[l * M + i] * B[j * K + l];
+                
+            }
+            #pragma omp critical
+            sum += local_sum
+            C[j * M + i] = sum;
+        }
+    }    
+}
+}
 
 int main()
 {
@@ -180,14 +202,20 @@ int main()
             serial_duration = end_time - start_time; 
             std::cout << "dgemm_with_collapse time: " << serial_duration.count() << std::endl;
             
-   	    start_time = std::chrono::high_resolution_clock::now();
+   	        start_time = std::chrono::high_resolution_clock::now();
             cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, A, m, B, k, 0.0, C, m);
             end_time = std::chrono::high_resolution_clock::now();
             serial_duration = end_time - start_time;
             std::cout << "cblass_dgemm time: " << serial_duration.count() << std::endl;
+
+            start_time = std::chrono::high_resolution_clock::now(); 
+            dgemm_manual(m, n, k, A, B, C)
+            end_time = std::chrono::high_resolution_clock::now();
+            serial_duration = end_time - start_time;
+            std::cout << "dgemm_manual time: " << serial_duration.count() << std::endl;
 	}
         delete[] A;
-	delete[] B;
+	    delete[] B;
         delete[] C;
     }
 
